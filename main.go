@@ -31,7 +31,7 @@ loop:
 	for {
 		select {
 		case opResult := <-resultCh:
-			fmt.Printf("%v %v", opResult.URL, opResult.MD5Hash)
+			fmt.Printf("%v %v\n", opResult.URL, opResult.MD5Hash)
 		case opError := <-errorCh:
 			fmt.Println(opError)
 		case <-doneCh:

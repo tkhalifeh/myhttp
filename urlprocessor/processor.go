@@ -62,9 +62,10 @@ func (p Processor) Process(resultCh chan<- HashResult, errCh chan<- error, doneC
 
 	for _, url := range p.urls {
 		url := url
-		// will block if more than the limit is running in parallel
-		<-p.ch
 		go func() {
+			// will block if more than the limit is running in parallel
+			<-p.ch
+
 			defer wg.Done()
 			defer func() {
 				// signal channel to allow other blocked goroutines to run
