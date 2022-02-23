@@ -27,7 +27,6 @@ func main() {
 	doneCh := make(chan struct{})
 	mainJob.Process(resultCh, errorCh, doneCh)
 
-loop:
 	for {
 		select {
 		case opResult := <-resultCh:
@@ -35,7 +34,7 @@ loop:
 		case opError := <-errorCh:
 			fmt.Println(opError)
 		case <-doneCh:
-			break loop
+			return
 		}
 	}
 }
